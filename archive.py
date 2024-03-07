@@ -52,19 +52,21 @@ def encode_video_nvenc(input_path, output_path, output_format='mp4', crf=23, max
 
 
 if __name__ == "__main__":
-    url = f"""https://www.youtube.com/watch?v=AoYNJDeGKTA"""
+    url = f"""https://www.youtube.com/watch?v=PpoeqjyWdBs"""
 
     # Download the video
-    video_path, video_title = download_video(url,renamed_filename=f"res3",output_path=f"F:\\downloads")
+    filename=r"FF VII Rebirth 6"
+    video_path, video_title = download_video(url,renamed_filename=filename,output_path=f"F:\\downloads")
 
     #video_path = f"""F:\\downloads\\res3.mp4"""
     #video_title = f"""res3"""
     # Define the output path for the re encoded video
     # {video_title}
-    output = f"downloads/{video_title}_720p.mp4"
+    output = f"downloads/{video_title}_480p.mp4"
 
     # Encode the video using ffmpeg with NVENC, CRF, max framerate, and resolution
-    encode_video_nvenc(video_path, output, crf=35, max_framerate=30, resolution='1280x720',bitrate="1500k")
+    #854 x 480 1280 x 720
+    encode_video_nvenc(video_path, output, crf=35, max_framerate=30, resolution='854 x 480',bitrate="1500k")
 
     print(f"finished")
 
