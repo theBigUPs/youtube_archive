@@ -13,12 +13,16 @@ def check_internet_connection():
         return False    
 
 
-def download_video(video_url, output_path="downloads", renamed_filename="downloaded_video"):
+def download_video(video_url, output_path="downloads", renamed_filename=None):
     # Download options for yt-dlp
+    template=f"{output_path}/{renamed_filename}.%(ext)s"
+    if renamed_filename==None:
+        template = f"{output_path}"+r"/%(title)s.%(ext)s"
+        
     ydl_options = {
         'live_from_start': True,
         'format': 'bestvideo+bestaudio/best',
-        'outtmpl': f"{output_path}/{renamed_filename}.%(ext)s",  # Use renamed_filename here
+        'outtmpl': template,  # Use renamed_filename here
         'verbose': True,
         #"skip_download":True,
         #"listformats":True
@@ -31,9 +35,15 @@ def download_video(video_url, output_path="downloads", renamed_filename="downloa
                 info = ydl.extract_info(video_url, download=True)
             # Get the downloaded video file path
             video_file_path = ydl.prepare_filename(info)
-            return video_file_path, renamed_filename
+
+            if renamed_filename is None: renamed_filename=info[f"title"]
+
+            return video_file_path,  renamed_filename
+        
         except yt_dlp.utils.DownloadError:
+
             print("Checking internet connection.")
+
             if check_internet_connection():
                 print("something unexpected happened")
             else:
@@ -68,11 +78,11 @@ def encode_video_nvenc(input_path, output_path, output_format='mp4', crf=23, max
 
 
 if __name__ == "__main__":
-    url = f"""url here"""
+    url = f"""https://www.youtube.com/watch?v=k9f2F1mP0U0"""
 
     # Download the video
-    filename=r"""trying to chill"""
-    video_path, video_title = download_video(url,renamed_filename=filename,output_path=f"F:\\downloads")
+    filename=r"""ff7"""
+    video_path, video_title = download_video(url,output_path=f"F:\\downloads")#renamed_filename=filename
 
     #video_path = f"""F:\\downloads\\FF VII Rebirth (Gongaga) 7.mp4"""
     #video_title = f"""FF VII Rebirth (Gongaga) 7"""
