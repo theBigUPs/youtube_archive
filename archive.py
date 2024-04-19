@@ -5,6 +5,22 @@ import subprocess
 import requests
 #https://github.com/yt-dlp/FFmpeg-Builds?tab=readme-ov-file#ffmpeg-static-auto-builds for ffmpeg
 
+
+# this is the ffmpeg command ytdlp uses to merge sources
+# ffmpeg command line: ffmpeg -y -loglevel "repeat+info" -i "file:F:\downloads\res3.f299.mp4" 
+# -i "file:F:\downloads\res3.f140.m4a" -c copy -map "0:v:0" -map "1:a:0" -movflags "+faststart" 
+# "file:F:\downloads\res3.temp.mp4" 
+
+
+
+# open cmd in vscode IT HAS TO BE CMD
+# python3 -m venv myenv to make a virtual environment
+# myenv\Scripts\activate to activate the virtual environment on windows
+# source myenv/bin/activate on linux
+# run myenv\Scripts\deactivate as is to deactivate virtual environment
+# pip list --outdated |||||||to get packages
+# pip install --upgrade <package_name>
+
 def check_internet_connection():
     try:
         response = requests.get("https://google.com", timeout=5)
@@ -78,11 +94,11 @@ def encode_video_nvenc(input_path, output_path, output_format='mp4', crf=23, max
 
 
 if __name__ == "__main__":
-    url = f"""https://www.youtube.com/watch?v=k9f2F1mP0U0"""
+    url = f"""https://www.youtube.com/watch?v=2w9j2OsFqSc"""
 
     # Download the video
-    filename=r"""ff7"""
-    video_path, video_title = download_video(url,output_path=f"F:\\downloads")#renamed_filename=filename
+    filename=r"""chillin"""
+    video_path, video_title = download_video(url,output_path=f"F:\\downloads",renamed_filename=filename)#renamed_filename=filename
 
     #video_path = f"""F:\\downloads\\FF VII Rebirth (Gongaga) 7.mp4"""
     #video_title = f"""FF VII Rebirth (Gongaga) 7"""
