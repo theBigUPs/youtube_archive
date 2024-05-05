@@ -64,7 +64,7 @@ def download_video(video_url, output_path="downloads", renamed_filename=None):
                 print("something unexpected happened")
             else:
                 print("No internet. Retrying in 20 seconds.")
-                time.sleep(20)  # Wait for 20 minutes before retrying
+                time.sleep(20)  # Wait for 20 seconds before retrying
 
 
 def encode_video_nvenc(input_path, output_path, output_format='mp4', crf=23, max_framerate=30, resolution='854x480',bitrate="1000k"):
@@ -94,11 +94,11 @@ def encode_video_nvenc(input_path, output_path, output_format='mp4', crf=23, max
 
 
 if __name__ == "__main__":
-    url = f"""https://www.youtube.com/watch?v=2w9j2OsFqSc"""
+    url = f"""https://www.youtube.com/watch?v=dT-fQ6rCCwU"""
 
     # Download the video
-    filename=r"""chillin"""
-    video_path, video_title = download_video(url,output_path=f"F:\\downloads",renamed_filename=filename)#renamed_filename=filename
+    filename=None#r"""chillin"""
+    video_path, video_title = download_video(url,output_path=f"D:\\downloads",renamed_filename=filename)#renamed_filename=filename
 
     #video_path = f"""F:\\downloads\\FF VII Rebirth (Gongaga) 7.mp4"""
     #video_title = f"""FF VII Rebirth (Gongaga) 7"""
@@ -110,6 +110,6 @@ if __name__ == "__main__":
     #854x480 1280x720
     encode_video_nvenc(video_path, output, crf=35, max_framerate=30, resolution='854x480',bitrate="1500k")
 
-    print(f"finished")
-
+    print(f"finished going to sleep in 3 minutes")
+    time.sleep(180)
     os.system("shutdown.exe /h")
