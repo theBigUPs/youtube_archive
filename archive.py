@@ -3,6 +3,7 @@ import time
 import yt_dlp
 import subprocess
 import requests
+import platform
 #https://github.com/yt-dlp/FFmpeg-Builds?tab=readme-ov-file#ffmpeg-static-auto-builds for ffmpeg
 
 
@@ -96,12 +97,12 @@ def encode_video_nvenc(input_path, output_path, output_format='mp4', crf=23, max
 
 
 if __name__ == "__main__":
-    url = f"""https://www.youtube.com/watch?v=ka11QOY8hiI"""
+    url = f"""https://www.youtube.com/watch?v=5ISlV6eG3Qo"""
 
     # Download the video
     filename=r"""work stream"""
     
-    video_path, video_title = download_video(url,output_path=f"D:\\downloads",renamed_filename=filename)#renamed_filename=filename
+    video_path, video_title = download_video(url,output_path=f"downloads",renamed_filename=filename)#renamed_filename=filename
 
     #video_path = f"""D:\\downloads\\ninja gaiden.mkv"""
     #video_title = f"""ninja gaiden"""
@@ -115,4 +116,7 @@ if __name__ == "__main__":
 
     print(f"finished going to sleep in 3 minutes")
     time.sleep(180)
-    os.system("shutdown.exe /h")#h for hibernate s for shutdown/s
+    if(os.name == "nt"):
+        os.system("shutdown.exe /h")#h for hibernate s for shutdown/s
+    else:
+        subprocess.run(["systemctl", "suspend"])
