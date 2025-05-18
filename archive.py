@@ -18,8 +18,10 @@ import requests
 # myenv\Scripts\activate to activate the virtual environment on windows
 # source myenv/bin/activate on linux
 # run myenv\Scripts\deactivate as is to deactivate virtual environment
-# pip list --outdated |||||||to get packages
+# pip list --outdated         to get packages
 # pip install --upgrade <package_name>
+# pip freeze > requirements.txt
+# pip install --upgrade --upgrade-strategy eager -r requirements.txt
 
 def check_internet_connection():
     try:
@@ -94,22 +96,23 @@ def encode_video_nvenc(input_path, output_path, output_format='mp4', crf=23, max
 
 
 if __name__ == "__main__":
-    url = f"""https://www.youtube.com/watch?v=dT-fQ6rCCwU"""
+    url = f"""https://www.youtube.com/watch?v=ka11QOY8hiI"""
 
     # Download the video
-    filename=None#r"""chillin"""
+    filename=r"""work stream"""
+    
     video_path, video_title = download_video(url,output_path=f"D:\\downloads",renamed_filename=filename)#renamed_filename=filename
 
-    #video_path = f"""F:\\downloads\\FF VII Rebirth (Gongaga) 7.mp4"""
-    #video_title = f"""FF VII Rebirth (Gongaga) 7"""
+    #video_path = f"""D:\\downloads\\ninja gaiden.mkv"""
+    #video_title = f"""ninja gaiden"""
     # Define the output path for the re encoded video
     # {video_title}
-    output = f"downloads/{video_title}_480p.mp4"
+    output = f"downloads480p/{video_title}_480p.mp4"
 
     # Encode the video using ffmpeg with NVENC, CRF, max framerate, and resolution
     #854x480 1280x720
-    encode_video_nvenc(video_path, output, crf=35, max_framerate=30, resolution='854x480',bitrate="1500k")
+    encode_video_nvenc(video_path, output, crf=35, max_framerate=30, resolution='854x480',bitrate="1500k")#"1500k"
 
     print(f"finished going to sleep in 3 minutes")
     time.sleep(180)
-    os.system("shutdown.exe /h")
+    os.system("shutdown.exe /h")#h for hibernate s for shutdown/s
